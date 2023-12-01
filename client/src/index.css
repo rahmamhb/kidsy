@@ -1,0 +1,12 @@
+*{
+  margin: 0;
+  box-sizing: content-box;
+}
+body {
+  margin: 0;
+  font-family: 'Source Sans 3', sans-serif;
+  background-color: #FAFAFA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+

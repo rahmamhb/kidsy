@@ -1,0 +1,109 @@
+.home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5em;
+}
+.rec-home{
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: row;
+    column-gap: 4em;
+    background-image: url("../assets/bgeffect.png");
+    background-size: cover;
+    padding: 2em 4em; 
+    border-radius: 1em;
+    align-items: center;
+    justify-content: center;
+    max-width: 80%; 
+    box-shadow: 0px 6px 32px 1px rgba(0, 0, 0, 0.08); 
+
+}
+.rec-home img{
+    height: 25em;
+}
+.rec-right{
+    display: flex ;
+    flex-direction: column;
+    row-gap: 3em;
+}
+.rec-right-txt{
+    color: #555;
+    font-size: 3em;
+    width: 7em;
+}
+.rec-right-txt span{
+    font-weight: 600;
+}
+.rec-right-search{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0em 1em;
+    border-radius: 54px;
+    background: #FFF;
+    color: #d9d9d9;
+    width: 260px;
+}
+.rec-right-search svg{
+    height: 30px;
+    width: 30px;
+}
+.rec-right-search input{
+    border: none;
+    padding: 1em;
+    outline: none;
+}
+.rec-right-search input::placeholder {
+    color: #d9d9d9;
+}
+.rec-right-search input:focus{
+    border: none;
+    color: #555;
+}
+.catego-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+    color: #555;
+    margin-bottom: 5em;
+}
+.catego-container p{
+    font-weight: 400;
+    font-size: 1.5em;
+}
+.catego-list{
+    padding: 1em 0em;
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+    overflow-x: scroll;
+    cursor: grab;
+    -ms-overflow-style: none;
+    scrollbar-width: none ;
+    width: 80vw;
+}
+.catego-list::-webkit-scrollbar{
+    display: none;
+}
+.category{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 1.5em;
+    border-radius: 11px;
+    background: #FFF;
+    box-shadow: 1px 2px 12px 0px rgba(0, 0, 0, 0.09);
+    cursor: pointer;
+}
+.category p {
+    text-align: center;
+    font-size: 16px;
+}
+.category a {
+    text-align: center;
+}
+.category svg{
+    height: 30px;
+    width: 30px;
+}

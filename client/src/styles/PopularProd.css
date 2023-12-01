@@ -1,0 +1,126 @@
+.popuProd-container{
+    display: flex;
+    flex-direction: column;
+    color: #555;
+    row-gap: 2em;
+    align-items: center;
+    margin-bottom: 5em;
+}
+.product-container-head{
+    display: flex;
+    flex-direction: row;
+    column-gap: 57em;
+    align-items: flex-end;
+}
+.product-container-head p{
+    font-weight: 400;
+    font-size: 1.5em;
+    color: #555;
+}
+.see-more-prods{
+    color: #C4C4C4;
+    cursor: pointer;
+}
+.see-more-prods svg{
+    height: 25px;
+    width: 25px;
+}
+.product-list{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3em;
+}
+.popular-list a {
+    color: #555;
+}
+.popular-prod{
+    display: flex;
+    flex-direction: row-reverse;
+    column-gap: 1em;
+    padding: 2.5em 1em;
+    border-radius: 11px;
+    background: #FFF;
+    box-shadow: 1px 2px 12px 0px rgba(0, 0, 0, 0.09);
+    align-items: flex-start;
+}
+.fav-btn{
+    border: none;
+    background-color: #fff;
+    color: #EB5954;
+    transition: background ease-in-out .3s;
+    padding: 0.5em;
+    border-radius: 4px;
+   
+}
+.fav-btn:hover{
+     background: rgba(235, 89, 84, 0.19);
+}
+.fav-btn svg{
+    height: 25px;
+    width: 25px;
+}
+.product-info{
+    display: flex;
+    flex-direction: row;
+}
+.product-info img{
+    border-radius: 7px;
+    height: 110px;
+    width: 110px;
+}
+.product-info-txt {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.product-info-txt-1{
+    display: flex;
+    flex-direction: column;
+}
+.product-info-txt-1 .prod-name{
+    font-weight: 500;
+    font-size: 1.2em;
+}
+.prod-reviews{
+    display: flex;
+    column-gap: 0.5em;
+    flex-direction: row;
+    align-items: center;
+}
+.prod-reviews .reviews-nbr{
+    font-size: 12px;
+    font-weight: 600;
+}
+.prod-reviews .stars{
+    display: flex;
+    flex-direction: row;
+    color: #FFEC3D;
+}
+.prod-reviews .stars svg{
+    height: 20px;
+    width: 20px;
+}
+.product-info-txt-2{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5em;
+}
+.product-info-txt-2 .prod-price{
+    color: #9D9D9D;
+    width: 80px;
+    font-size: 16px;
+}
+.product-info-txt-2 .prod-price span{
+    color: #555;
+    font-weight: 500;
+}
+.product-info-txt-2 .add-cart-btn {
+    padding: 0.7em;
+    text-align: center;
+    color: #9d9d9d;
+    font-weight: 500;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #D9D9D9;
+    cursor: pointer;
+}

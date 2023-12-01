@@ -1,0 +1,200 @@
+.checkout-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5em;
+}
+.checkout-header{
+    color: #555;
+    font-weight: 500;
+    font-size: 1.6em;
+}
+.checkout-container-form{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 6em;
+    padding: 5em;
+}
+.checkout-inputs{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+}
+.form-mini-section{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+}
+
+.label-float{
+    position: relative;
+    padding-top: 13px;
+}
+  
+.label-float input{
+    border: 1px solid #D9D9D9;
+    border-radius: 5px;
+    outline: none;
+    min-width: 250px;
+    padding: 15px 20px;
+    font-size: 16px;
+    transition: all .1s linear;
+    background-color: #fff;
+    color: #555;
+}
+  
+.label-float input:not(:focus)::placeholder {
+    color: transparent;
+}
+  
+.label-float input:focus::placeholder {
+    color: #999;
+}
+
+.label-float label{
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 15px;
+    transition: all .1s linear;
+    background-color: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+}
+  
+.label-float input:required:invalid + label{
+    color: #555;
+}
+.label-float input:required:invalid + .label-float input::placeholder{
+    color: transparent;
+} 
+.label-float input:focus:required:invalid{
+    border: 2px solid #597EB5;
+}
+.label-float input:focus:required:invalid + label{
+    color:#597EB5;
+}
+  
+.label-float input:focus + label,
+.label-float input:not(:placeholder-shown) + label{
+    font-size: 13px;
+    top: 0;
+    color: #555;
+}
+.label-float input:focus + label{
+    background-color: #FAFAFA;
+}
+
+.text-area{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.text-area textarea::placeholder{
+    color: #999;
+}
+.text-area textarea:focus::placeholder{
+    color: transparent;
+}
+.text-area textarea{
+    width: 22em;
+    min-height: 118px;
+    padding-top: 10px;
+    border-radius: 0px;
+    border:1px solid #9d9d9d;
+    text-indent:10px;
+    transition: all .1s linear;
+    border-radius: 10px;
+}
+.text-area textarea:focus{
+    border: 1px solid #9d9d9d;
+}
+.text-area label{
+    color: #555;
+}
+select{
+    border: 0;
+    font-size: 18px;
+    padding: 16px 15px;
+    color: #555;
+    box-shadow: 0px 4px 14px 0px #d8cfcf87;
+    border-radius: 6px;
+}
+.country{
+    font-weight:400 ;
+    font-size: 1.2em;
+    color: #555;
+}
+.country span{
+    color: #C4C4C4;
+}
+
+.checkout-total{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5em;
+    padding: 2em 1.5em;
+    border-radius: 22px;
+    background: #FFF;
+    box-shadow: 0px 4px 10px 2px rgba(0, 0, 0, 0.06);
+}
+.checkout-total .total-head{
+    color: #597EB5;
+    font-weight: 500;
+    font-size: 1.3em;
+}
+.checkout-total-item{
+    color: #555;
+    display: flex;
+    flex-direction: row;
+    column-gap: 3em;
+}
+
+.span-bord{
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0.6em;
+    border-bottom: solid 0.5px #9d9d9d;
+    color: #555;
+    font-weight: 500;
+    justify-content: space-between;
+    width: 22em;
+}
+.checkout-total-elems{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+}
+.Delivery-txt{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #555;
+}
+.Delivery-txt .bold , .span-bord .bold{
+    font-weight: 500;
+}
+.order-btn {
+    width: 8em;
+    border: 0;
+    background: none;
+    padding: 1.2em 2.1em;
+    background-color: #597EB5;
+    color: #FFF;
+    font-weight: 600;
+    border-radius: 14px;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+.order-btn:hover{
+    background-color: #6f88ac;
+}
+.remarque{
+    color: #9d9d9d;
+    font-size: 10px;
+    width: 247px;
+}
+.txt-1{
+    color: #555;
+}
