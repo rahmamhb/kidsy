@@ -35,7 +35,7 @@ const Categories = () => {
                 {CategoriesData.map((category , index)=>{
                     return(
                         <div className="category" key={category.Category_ID}>
-                            <NavLink>
+                            <NavLink to={`category/${category.Category_ID}`}>
                                 <span style={{ color: getRandomPastelColor() }}>
                                     <FurnitureIcon></FurnitureIcon>
                                 </span>

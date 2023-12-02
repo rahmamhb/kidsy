@@ -6,6 +6,7 @@ import Cart from "./pages/Cart" ;
 import FAQ from './pages/Faq';
 import Fav from './pages/Fav';
 import Checkout from './pages/Checkout';
+import Category from './pages/Category';
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
                     <Route  path="/cart" element={<Cart></Cart>}></Route>
                     <Route  path="/favorites" element={<Fav></Fav>}></Route>
                     <Route  path="/checkout" element={<Checkout></Checkout>}></Route>
+                    <Route  path='/category/:categoryID' element={<Category></Category>}></Route>
                 </Routes>   
             </div>
         </div>
