@@ -2,6 +2,8 @@ import { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import prodImg from "../assets/socks.jpg" 
+import prodImg1 from "../assets/blog3.jpg" 
+import prodImg2 from "../assets/blog7.jpg" 
 import CheckIcon from '@mui/icons-material/CheckRounded';
 import MoreIcon from '@mui/icons-material/ExpandMoreRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
@@ -14,11 +16,11 @@ import RatingStars from "../components/RatingStars";
 import "../styles/Category.css" ;
 const Category = () => {
     const [productsData , setProductData] = useState([
-        {productID : 1 , productName : "Product name" , productRating : 4.5 , productReviewsNbr : "15" , productPrice : "2500"  , productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4 , productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 2 , productName : "Product name" , productRating : 3 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
+        {productID : 1 , productName : "Product name" , productRating : 4.5 , productReviewsNbr : "15" , productPrice : "2500"  , productImg : prodImg , productImg1 : prodImg1 , productImg2 : prodImg2 , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4 , productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
+        {productID : 2 , productName : "Product name" , productRating : 3 , productReviewsNbr : "15" , productPrice : "3500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 3 , productName : "Product name" , productRating : 5 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 4 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.5, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 5 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
+        {productID : 5 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "5500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 6 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 7 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.2, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 8 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.6, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"}
@@ -38,7 +40,7 @@ const Category = () => {
         {colorID : 3 , colorValue : "255 255 255" , colorName : "white"} ,
         {colorID : 4 , colorValue : "255 255 255" , colorName : "white"} ,
     ])
-    const [reviews, setReviews] = useState([
+    const [reviewsData, setReviewsData] = useState([
         {reviewID : 1 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
         {reviewID : 2 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
         {reviewID : 3 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
@@ -58,7 +60,7 @@ const Category = () => {
     const [reviewRate , setReviewRate] = useState(1) ;
     const [reviewContent , setReviewContent] = useState("") ;
     const [newReview, setNewReview] = useState([]);
-  
+    const [selectedImg , setSlectedImg] = useState(prodImg);
     const categoryID = useParams().categoryID;
     const location = useLocation();
     const [visibleCategories, setVisibleCategories] = useState(5);
@@ -67,9 +69,8 @@ const Category = () => {
     };
 
     useEffect(() => {
-        const currentCategory = CategoriesData.find(cat => cat.categoryID === Number(categoryID));
-        console.log(currentCategory)
-        setCategory(currentCategory ? currentCategory.categoryName : '');
+        const currentCategory = CategoriesData.find(cat => cat.CategoryID === Number(categoryID));
+        setCategory(currentCategory ? currentCategory.CategoryName : '');
         fetchProducts(categoryID);
     }, [location.search, categoryID , CategoriesData]);
     const fetchProducts = async (categoryId) => {
@@ -105,13 +106,29 @@ const Category = () => {
                                 type="number"
                                 value={minPrice}
                                 placeholder="min"
-                                onChange={(e) => setMinPrice(e.target.value)}
+                                onChange={(e) => {
+                                    const value = parseFloat(e.target.value);
+                                    if (!isNaN(value) && value > 0) {
+                                        setMinPrice(value);
+                                    } else {
+                                        // Handle invalid input, such as showing an error message or resetting to a default value
+                                        setMinPrice(0); 
+                                    }
+                                }}
                             />
                             <input
                                 type="number"
                                 value={maxPrice}
                                 placeholder="max"
-                                onChange={(e) => setMaxPrice(e.target.value)}
+                                onChange={(e) => {
+                                    const value = parseFloat(e.target.value);
+                                    if (!isNaN(value) && value > 0) {
+                                        setMaxPrice(value);
+                                    } else {
+                                        // Handle invalid input, such as showing an error message or resetting to a default value
+                                        setMaxPrice(0); 
+                                    }
+                                }}
                             />
                         </div>
                     </div>
@@ -149,7 +166,7 @@ const Category = () => {
                             <p className="sort-section-header">Sort</p>
                             <div className="sort-inputs">
                                 <span className="sort-category">{category}</span>
-                                <label>
+                                <label className={sortByLatest ? "checked" : ""}>
                                     <input
                                     type="checkbox"
                                     checked={sortByLatest}
@@ -157,7 +174,7 @@ const Category = () => {
                                     />
                                     Latest
                                 </label>
-                                <label>
+                                <label className={sortByPopular ? "checked" : ""}>
                                     <input
                                     type="checkbox"
                                     checked={sortByPopular}
@@ -175,11 +192,22 @@ const Category = () => {
                         </div>
                     </div>
                     <div className="products">
-                        {selectedProduct &&( 
-                        <div className="selected-product">
-                            <div className="selected-product-box">
+                        {selectedProduct && (
+                        <div className="the-one-product">
+                            <div className="one-product">
                                 <div className="selected-product-images">
-
+                                    <img src={selectedImg} alt="big-img" className="big-img"/>
+                                    <div className="img-choices">
+                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg)}} className="img-choice"> 
+                                            <img src={selectedProduct.productImg} alt="img-small" /> 
+                                        </span>
+                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg1)}} className="img-choice"> 
+                                            <img src={selectedProduct.productImg1} alt="img-small" /> 
+                                        </span>
+                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg2)}} className="img-choice"> 
+                                            <img src={selectedProduct.productImg2} alt="img-small" /> 
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="selected-product-info">
                                     <button className="fav-btn"><FavoriteIcon></FavoriteIcon></button>
@@ -197,23 +225,90 @@ const Category = () => {
                                         <div className="selected-product-info12">
                                             <p className="header">colors :</p>
                                             <div  className="selected-product-colors">
-                                                <span className="selected-product-color one" st></span>
-                                                <span className="selected-product-color two"></span>
-                                                <span className="selected-product-color three"></span>
+                                                <span className="selected-product-color one" style={{"--productColor": selectedProduct.productColor1}}></span>
+                                                <span className="selected-product-color two" style={{"--productColor": selectedProduct.productColor1}}></span>
+                                                <span className="selected-product-color three" style={{"--productColor": selectedProduct.productColor1}}></span>
                                             </div>
                                         </div>
                                         <div className="selected-product-info13">
                                             <div className="selected-product-info131">
                                                 <p className="selected-product-price-header">Total price</p>
-                                                <p className="selected-product-price">{selectedProduct.productPrice} DZD <span>{selectedProduct.productPrice - selectedProduct.productPrice * selectedProduct.productDiscount } DZD </span></p>
+                                                <div className="selected-product-price-box">
+                                                    <p className={selectedProduct.productDiscount > 0 ? "selected-product-price crossed": "selected-product-price"}>
+                                                        {selectedProduct.productPrice} DZD 
+                                                    </p>
+                                                    {selectedProduct.productDiscount > 0 && (
+                                                        <span>
+                                                            {selectedProduct.productPrice - selectedProduct.productPrice * selectedProduct.productDiscount } DZD 
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </div>
                                             <button className="selected-product-add-btn">Add to cart</button>
                                         </div>
                                     </div>
-                                </div>
-
+                                </div> 
                             </div>
-                            <div className="selected-product-reviews-box"></div>
+                            <div className="one-product-reviews-container">
+                                <p className="header">Reviews :</p>
+                                <div className="one-product-reviews">
+                                    {reviewsData.length > 0 &&( 
+                                        <div className="one-product-old-reviews">
+                                            {reviewsData.map((review , index)=>
+                                                (
+                                                    <div className="one-product-old-review">
+                                                        <span>
+                                                            {review.reviewerName.split(' ').map(word => word.charAt(0)).join('')}
+                                                        </span>
+                                                        <div className="one-product-old-review-info">
+                                                            <p className="Reviewer-name">{review.reviewerName}</p>
+                                                            <RatingStars rating={review.reviewRate}></RatingStars>
+                                                            <p className="Review-content">{review.reviewContent}</p>
+                                                            <p className="Review-date">{review.ReviewDate}</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                                    <div className="one-product-new-review">
+                                        <p className="header">Rate and review </p>
+                                        <form>
+                                            <div className="star-rating">
+                                                <input className="radio-input" type="radio" id="star5" name="star-input" value="5" onChange={(e) => setReviewRate(e.target.value)} required />
+                                                <label className="radio-label"  for="star5" title="5 stars">5 stars</label>
+
+                                                <input className="radio-input" type="radio" id="star4" name="star-input" value="4" onChange={(e) => setReviewRate(e.target.value)} required />
+                                                <label className="radio-label" for="star4" title="4 stars">4 stars</label>
+
+                                                <input className="radio-input" type="radio" id="star3" name="star-input" value="3" onChange={(e) => setReviewRate(e.target.value)} required />
+                                                <label className="radio-label" for="star3" title="3 stars">3 stars</label>
+
+                                                <input className="radio-input" type="radio" id="star2" name="star-input" value="2" onChange={(e) => setReviewRate(e.target.value)} required />
+                                                <label className="radio-label" for="star2" title="2 stars">2 stars</label>
+
+                                                <input className="radio-input" type="radio" id="star1" name="star-input" value="1" onChange={(e) => setReviewRate(e.target.value)} required />
+                                                <label className="radio-label" for="star1" title="1 star">1 star</label>
+                                            </div>
+                                            <div className="reviewer-info">                                            
+                                                <div class="label-float reviewer-name">
+                                                    <input type="text" placeholder="" value={reviewerName} onChange={(e)=>{ setReviewerName(e.target.value)}} required/>
+                                                    <label>Name</label>
+                                                </div>
+                                                <div class="label-float reviewer-email">
+                                                    <input type="email" placeholder="" value={reviewerEmail} onChange={(e)=>{ setReviewerEmail(e.target.value)}} required/>
+                                                    <label>Email</label>
+                                                </div>
+                                            </div>
+                                            <div className="text-area">
+                                                <label>your review</label>
+                                                <textarea placeholder="" value={reviewContent} onChange={(e)=>{ setReviewContent(e.target.value)}} ></textarea>
+                                            </div>
+                                            <button className="add-review-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div> 
                         </div>
                         )}
                         <div className="product-list">
