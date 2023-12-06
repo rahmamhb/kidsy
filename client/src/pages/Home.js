@@ -6,7 +6,9 @@ import "../styles/Home.css"
 import PopularProd from "../components/PopularProd";
 import BlogHome from "../components/BlogHome";
 import Footer from "../components/Footer";
+import { useState } from "react";
 const Home = () => {
+    const [searchQuery , setSearchQuery] = useState("");
     return ( 
         <div className="home-page">
             <Navbar></Navbar>
@@ -15,7 +17,7 @@ const Home = () => {
                     <p className="rec-right-txt"><span>Kid's paradise, </span> Shop with joy!</p>
                     <div className="rec-right-search">
                         <SearchIcon></SearchIcon>
-                        <input type="text" placeholder="Search..."></input>
+                        <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
                     </div>   
                 </div>
                 <img  src={homeIllu} alt="home-illu"/>
