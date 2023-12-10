@@ -1,0 +1,34 @@
+table {
+    border-collapse: separate; /* Make sure border-spacing is applied */
+    border-spacing: 10px 5px; /* 10px for column gap, 5px for row gap */
+    color: #555;
+}
+
+td, th {
+    padding: 10px; /* Optional: Add padding to cells for better spacing */
+}
+th{
+    cursor: pointer;
+}
+.status-row{
+    display: flex;
+    align-items: center;
+    column-gap: 1em;
+}
+.status-row.Delivered{
+    color: #8BDA4C;
+}
+.status-row.Processing{
+    color: #67C8FF;
+}
+.status-row.Confirmed{
+    color: #FFC759;
+}
+.status-row.Pending{
+    color: #FE5C5C;
+}
+tbody{
+    height: 10em;
+    overflow-y: scroll;
+}
+

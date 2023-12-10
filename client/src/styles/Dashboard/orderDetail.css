@@ -1,0 +1,86 @@
+.order-detail-container{
+    padding-top: 3em;
+    display: flex;
+    flex-direction: column;
+    row-gap: 2em;
+    align-items: flex-start;
+}
+.order-detail-content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5em;
+}
+.order-detail-content p{
+    color: #555;
+    font-size: 1em;
+    font-weight: 400;
+}
+.order-detail-content p span{
+    color: #9D9D9D;
+}
+.order-detail-content .status-section{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+    align-items: center;
+}
+.order-detail-content .status-section p{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1em;
+}
+.order-detail-content .status-section .order-edit-btn , .order-detail-content .status-section .order-save-btn , .order-detail-content .status-section .order-cancel1-btn{
+    outline: 0;
+    border: 0;
+    background: none;
+    color: #555;
+    cursor: pointer;
+}
+
+.order-detail-content .status-section .order-save-btn:hover{
+    color: #597EB5;
+}
+.order-detail-content .status-section .order-edit-btn svg{
+    height: 20px;
+    width: 20px;
+}
+.order-btn-section{
+    padding-top: 3em;
+    display: flex;
+    flex-direction: row;
+    column-gap: 5em;
+}
+.order-btn-section button{
+    outline: 0;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 10px;
+    width: 6em;
+    font-weight: 500;
+}
+.order-btn-section .order-cancel-btn{
+    border: #555 solid 1px;
+    color: #555;
+    background-color: #fff;
+}
+.order-btn-section .order-delete-btn{
+    border: #FE5C5C solid 1px;
+    color: #fff;
+    background-color: #FE5C5C;
+}
+.order-detail-content .cart-total{
+    background: none;
+    box-shadow: none;
+    font-size: 1em;
+    padding: 0;
+}
+.order-detail-content .cart-total .total-head {
+    color: #555;
+    font-weight: 500;
+    font-size: 1em;
+}
+.order-detail-content .cart-total-elems .cart-item .cart-item-txt {
+    column-gap: 1em;
+    font-size: 1em;
+}
