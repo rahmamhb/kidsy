@@ -1,0 +1,191 @@
+import { useState , useEffect } from "react";
+import axios from 'axios';
+import Sidebar from "../../components/Dashboard/Sidebar";
+import "../../styles/Dashboard/AddProduct.css"
+const AddProduct = () => {
+
+    let [CategoriesData , setCategoriesData ]= useState([{}])
+    const [productName , setProductName] = useState("")
+    const [productCategory , setProductCategory] = useState(CategoriesData[0].categoryID)
+    const [productDescription , setProductDescription] = useState("")
+    const [productPrice , setProductPrice] = useState()
+    const [productDiscount , setProductDiscount] = useState()
+    const [productQuantity , setProductQuantity] = useState()
+    const [productImages, setProductImages] = useState([]);
+    /*const [productImg, setProductImg] = useState(productImages[0]);
+    const [productImg1, setProductImg1] = useState(productImages[1]);
+    const [productImg2, setProductImg2] = useState(productImages[2]);
+    useEffect(()=>{
+        setProductImg(productImages[0])
+        setProductImg1(productImages[1])
+        setProductImg2(productImages[2])
+    } , [productImages])*/
+
+    const [productColors, setProductColors] = useState({
+        color1: '#555', 
+        color2: '#555',
+        color3: '#555',
+    });
+
+    console.log(productCategory)
+    useEffect(() => {
+        fetchCategoriesData();
+    }, []);
+    
+    const fetchCategoriesData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/api/category/'); 
+            setCategoriesData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    const handleColorChange = (event, colorKey) => {
+        const color = event.target.value;
+        setProductColors({
+          ...productColors,
+          [colorKey]: color,
+        });
+    };
+
+    const handleImageChange = (event) => {
+        const files = event.target.files;
+
+        setProductImages([
+            files[0] || productImages[0],
+            files[1] || productImages[1],
+            files[2] || productImages[2],
+        ]);
+    };
+    const handleSubmitProduct =()=>{
+        const formData = new FormData()
+
+        formData.append('productName' , productName)
+        formData.append('productDescription' , productDescription)
+        formData.append('productPrice' , productPrice)
+        formData.append('productDiscount' , productDiscount)
+        formData.append('productCategory' , productCategory)
+        formData.append('productQuantity' , productQuantity)
+        formData.append('productColors' , productColors)
+        formData.append('productImages', productImages);
+
+        /*productImages.forEach((image, index) => {
+            formData.append(`img${index + 1}`, image);
+        });*/
+        axios.post('http://localhost:3001/api/product/' , formData)
+        .then(res =>{
+            if(res.data.staus === "Success"){
+                console.log("succeded")
+            }
+            else{
+                console.log("failed")
+            }
+        })
+        .catch(err => console.log(err))
+    }
+    return ( 
+        <div className="Dashboard-page">
+            <Sidebar></Sidebar>
+            <div className="add-product-container">
+                <p className="add-product-title">Add a product</p>
+                <form className="add-product-form" onSubmit={handleSubmitProduct}>
+                    <div className="add-product-form-section1">
+                            <div className="label-float">
+                                <input type="text" placeholder=" " value={productName} onChange={(e)=>{ setProductName(e.target.value)}} required/>
+                                <label>Product Name</label>
+                            </div>
+                            <div className="text-area">
+                                <label>Product Description</label>
+                                <textarea placeholder="Notes about your product , special notes ." value={productDescription} onChange={(e)=>{ setProductDescription(e.target.value)}} required ></textarea>
+                            </div> 
+                            <select value={productCategory} onChange={(e)=>{ setProductCategory(e.target.value)}} required>
+                                {CategoriesData.map(category => (
+                                    <option value={category.categoryID}>{category.categoryName}</option>
+                                ))}
+                            </select>
+                    </div>
+                    <div className="add-product-form-section2">
+                        <div className="product-images">
+                            <div className="input-img">
+                                <label htmlFor="productImages">Product Images:</label>
+                                <input
+                                type="file"
+                                id="productImages"
+                                name="productImages"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                multiple
+                                />
+                            </div>
+                            <div className="rendred-img">
+                                {productImages.map((image, index) => (
+                                    <div key={index}>
+                                        <img src={URL.createObjectURL(image)} alt={`Product ${index + 1}`} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="product-colors">
+                            <div className="input-color">
+                               <div>
+                                    <label htmlFor="colorInput1">Color 1:</label>
+                                    <input
+                                    type="color"
+                                    id="colorInput1"
+                                    value={productColors.color1}
+                                    onChange={(e) => handleColorChange(e, 'color1')}
+                                    required
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="colorInput2">Color 2:</label>
+                                    <input
+                                    type="color"
+                                    id="colorInput2"
+                                    value={productColors.color2}
+                                    onChange={(e) => handleColorChange(e, 'color2')}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="colorInput3">Color 3:</label>
+                                    <input
+                                    type="color"
+                                    id="colorInput3"
+                                    value={productColors.color3}
+                                    onChange={(e) => handleColorChange(e, 'color3')}
+                                    />
+                                </div> 
+                            </div>
+                            <div className="rendred-colors">
+                                <p>Selected Colors:</p>
+                                <div style={{ backgroundColor: productColors.color1  }}></div>
+                                <div style={{ backgroundColor: productColors.color2 }}></div>
+                                <div style={{ backgroundColor: productColors.color3 }}></div>
+                            </div>
+                        </div>
+                        <div className="product-numbers">
+                            <div className="label-float">
+                                <input type="number" placeholder="1000 DZD " value={productPrice} onChange={(e)=>{ setProductPrice(e.target.value)}} required/>
+                                <label>Price</label>
+                            </div>
+                            <div className="label-float">
+                                <input type="number" placeholder="0.5" value={productDiscount} onChange={(e)=>{ setProductDiscount(e.target.value)}} required/>
+                                <label>Discount</label>
+                            </div>
+                            <div className="label-float">
+                                <input type="number" placeholder="10" value={productQuantity} onChange={(e)=>{ setProductQuantity(e.target.value)}} required/>
+                                <label>Quantity</label>
+                            </div>
+                        </div>
+                        <div className="add-product-btn">
+                            <button type="reset" className="product-cancel-btn">Cancel</button>
+                            <button type="submit" className="order-btn" >Add product</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
+ 
+export default AddProduct;

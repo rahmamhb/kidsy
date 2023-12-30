@@ -18,7 +18,7 @@ const RatingStars = ({ rating }) => {
     }
   }
 
-  return <div className='stars'>{stars}</div>;
+  return <div className='stars text-yellow-300'>{stars}</div>;
 };
 
 export default RatingStars;

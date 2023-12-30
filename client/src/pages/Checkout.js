@@ -1,27 +1,36 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import "../styles/Checkout.css"
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer"
+import Footer from "../components/Footer";
+import axios from 'axios';
 
 const Checkout = () => {
-    const [wilayaData ,setWilayaData] = useState([
-        {wilayaName : "Guelma" , DeliveryPrice : 400},
-        {wilayaName : "Guelma" , DeliveryPrice : 400},
-        {wilayaName : "Guelma" , DeliveryPrice : 400},
-        {wilayaName : "Guelma" , DeliveryPrice : 400},
-    ])
+    const [wilayaData ,setWilayaData] = useState([{}])
     const [cartData, setCartData] = useState([
         { productID: 1,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
         { productID: 2,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
         { productID: 3,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
     ]);
 
+    useEffect(() => {
+        fetchWilayaData();
+    }, []);
+    
+    const fetchWilayaData = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/api/wilaya/'); 
+            setWilayaData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    console.log(wilayaData)
     const [clientFisrtName , setClientFisrtName] = useState("") ;
     const [clientLastName , setClientLastName] = useState("") ;
     const [clientPhone , setClientPhone] = useState(0) ;
     const [clientEmail , setClientEmail] = useState("") ;
     const [wilaya , setWilaya] = useState(wilayaData[0].wilayaName) ;
-    const [fullAddress , setFullAddress] = useState("") ;
+    const [fullAdress , setFullAdress] = useState("") ;
     const [zipCode, setzipCode] = useState(0) ;
     const [oredrNotes , setOrderNotes] = useState("") ;
     const [DeliveryPrice , setDeliveryPrice] = useState(0) ;
@@ -30,7 +39,7 @@ const Checkout = () => {
         const selectedWilayaName = event.target.value;
         if(wilayaData.length > 0 ){
             const selectedWilaya =wilayaData.find(wilaya => wilaya.wilayaName === selectedWilayaName);
-            setDeliveryPrice(selectedWilaya.DeliveryPrice);
+            setDeliveryPrice(selectedWilaya.deliveryPrice);
             setWilaya(selectedWilayaName);
         }
     }
@@ -67,7 +76,7 @@ const Checkout = () => {
                         </select>
                         <div className="form-mini-section">
                             <div class="label-float">
-                                <input type="text" placeholder="" value={fullAddress} onChange={(e)=>{ setFullAddress(e.target.value)}} required/>
+                                <input type="text" placeholder="" value={fullAdress} onChange={(e)=>{ setFullAdress(e.target.value)}} required/>
                                 <label>Full address</label>
                             </div>
                             <div class="label-float">

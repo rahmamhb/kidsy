@@ -36,7 +36,7 @@ const Sidebar = () => {
                     >
                         
                         <span><InventoryIcon></InventoryIcon></span>
-                        <p>Inventory</p>
+                        <p>Stock</p>
                     </NavLink>
                     <NavLink 
                         to="/website"

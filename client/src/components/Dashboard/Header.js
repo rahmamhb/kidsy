@@ -6,7 +6,7 @@ import NotificationsIcon from '@mui/icons-material/NotificationsNoneRounded';
 const Header = () => {
     const [searchQuery , setSearchQuery] = useState("");
     return ( 
-        <div className="header-container">
+        <div className="header-container justify-end">
             <div className="rec-right-search">
                 <SearchIcon></SearchIcon>
                 <input type="text" placeholder="Search..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} ></input>

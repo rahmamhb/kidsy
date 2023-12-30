@@ -13,6 +13,7 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RatingStars from "../components/RatingStars";
+import axios from 'axios';
 import "../styles/Category.css" ;
 const Category = () => {
     const [productsData , setProductData] = useState([
@@ -25,15 +26,7 @@ const Category = () => {
         {productID : 7 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.2, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
         {productID : 8 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.6, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"}
     ])
-    let [CategoriesData , setCategoriesData ]= useState([
-        {CategoryID : 1 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 2 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 3 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 4 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 5 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 6 , CategoryName : "Nursery Furniture" },
-        {CategoryID : 7 , CategoryName : "Nursery Furniture" }
-    ])
+    let [CategoriesData , setCategoriesData ]= useState([])
     const [colorsData , setColorsData] = useState([
         {colorID : 1 , colorValue : "255 255 255" , colorName : "white"} ,
         {colorID : 2 , colorValue : "255 255 255" , colorName : "white"} ,
@@ -69,12 +62,21 @@ const Category = () => {
     };
 
     useEffect(() => {
+        fetchCategories();
         const currentCategory = CategoriesData.find(cat => cat.CategoryID === Number(categoryID));
         setCategory(currentCategory ? currentCategory.CategoryName : '');
         fetchProducts(categoryID);
     }, [location.search, categoryID , CategoriesData]);
     const fetchProducts = async (categoryId) => {
       
+    }
+    const fetchCategories = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/api/category/'); 
+            setCategoriesData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
 
     return ( 
@@ -86,12 +88,12 @@ const Category = () => {
                         <p className="filter-title">Category</p>
                         {CategoriesData.slice(0, visibleCategories).map((category , index)=>(
                             <NavLink 
-                                to = {`/category/${category.CategoryID}`}
+                                to = {`/category/${category.categoryID}`}
                                 className={({isActive})=>(isActive ? "active-category-link category-link" : "category-link")}
-                                key={category.CategoryID}
+                                key={category.categoryID}
                             >
                                 <span><CheckIcon></CheckIcon></span>
-                                <p>{category.CategoryName}</p>
+                                <p>{category.categoryName}</p>
 
                             </NavLink>
                         ))}

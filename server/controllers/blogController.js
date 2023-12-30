@@ -57,7 +57,7 @@ const readOne = (req, res) => {
   
 const deleteOne = (req, res) => {
     const itemId = req.params.id;
-    const sql = 'DELETE FROM faq WHERE id = ?';
+    const sql = 'DELETE FROM faq WHERE blogID = ?';
     const values = [itemId];
   
     db.query(sql, values, (err, results) => {

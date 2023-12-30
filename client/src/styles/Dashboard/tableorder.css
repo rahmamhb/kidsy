@@ -1,11 +1,11 @@
 table {
-    border-collapse: separate; /* Make sure border-spacing is applied */
-    border-spacing: 10px 5px; /* 10px for column gap, 5px for row gap */
+    border-collapse: separate;
+    border-spacing: 25px 5px; 
     color: #555;
 }
 
 td, th {
-    padding: 10px; /* Optional: Add padding to cells for better spacing */
+    padding: 7px 15px;
 }
 th{
     cursor: pointer;
@@ -26,6 +26,12 @@ th{
 }
 .status-row.Pending{
     color: #FE5C5C;
+}
+.status-row.in-stock{
+    color: #AEE7F1;
+}
+.status-row.out-of-stock{
+    color: #F0C1C4;
 }
 tbody{
     height: 10em;

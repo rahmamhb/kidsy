@@ -1,0 +1,8 @@
+.add-faq-container .label-float input{
+    min-width: 26em;
+    padding: 25px 20px;
+}
+.add-faq-container .text-area textarea{
+    width: 28em;
+    min-height: 210px;
+}
