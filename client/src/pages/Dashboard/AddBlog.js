@@ -20,6 +20,7 @@ const AddBlog = () => {
 
         setFile(selectedFile);
     };
+    console.log(file)
     const handleSubmitBlog =()=>{
         const formData = new FormData();
         formData.append('blogTitle', blogTitle);

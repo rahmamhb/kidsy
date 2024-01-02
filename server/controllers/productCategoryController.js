@@ -2,7 +2,7 @@ const db = require('../db');
 
 const readAll = (req, res) => {
     const itemId = req.params.id;
-    const sql = 'SELECT * FROM category WHERE id = ?';
+    const sql = 'SELECT * FROM category WHERE productID = ?';
     const values = [itemId];
   
     db.query(sql, values, (err, results) => {

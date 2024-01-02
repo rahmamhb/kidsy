@@ -11,23 +11,15 @@ const AddProduct = () => {
     const [productPrice , setProductPrice] = useState()
     const [productDiscount , setProductDiscount] = useState()
     const [productQuantity , setProductQuantity] = useState()
-    const [productImages, setProductImages] = useState([]);
-    /*const [productImg, setProductImg] = useState(productImages[0]);
-    const [productImg1, setProductImg1] = useState(productImages[1]);
-    const [productImg2, setProductImg2] = useState(productImages[2]);
-    useEffect(()=>{
-        setProductImg(productImages[0])
-        setProductImg1(productImages[1])
-        setProductImg2(productImages[2])
-    } , [productImages])*/
+    const [file, setFile] = useState();
+    const [previewImage, setPreviewImage] = useState(null)
 
-    const [productColors, setProductColors] = useState({
-        color1: '#555', 
-        color2: '#555',
-        color3: '#555',
-    });
+    const [productColors, setProductColors] = useState([
+        '#000000', 
+        '#000000', 
+        '#000000', 
+    ]);;
 
-    console.log(productCategory)
     useEffect(() => {
         fetchCategoriesData();
     }, []);
@@ -40,22 +32,26 @@ const AddProduct = () => {
             console.error('Error fetching data:', error);
         }
     }
-    const handleColorChange = (event, colorKey) => {
+    const handleColorChange = (event, colorIndex) => {
         const color = event.target.value;
-        setProductColors({
-          ...productColors,
-          [colorKey]: color,
+        setProductColors((prevColors) => {
+          const newColors = [...prevColors];
+          newColors[colorIndex] = color;
+          return newColors;
         });
     };
 
-    const handleImageChange = (event) => {
-        const files = event.target.files;
+    const handleFile = (event) => {
+        const selectedFile = event.target.files[0];
+        if (selectedFile) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+            };
+            reader.readAsDataURL(selectedFile);
+        }
 
-        setProductImages([
-            files[0] || productImages[0],
-            files[1] || productImages[1],
-            files[2] || productImages[2],
-        ]);
+        setFile(selectedFile);
     };
     const handleSubmitProduct =()=>{
         const formData = new FormData()
@@ -67,11 +63,11 @@ const AddProduct = () => {
         formData.append('productCategory' , productCategory)
         formData.append('productQuantity' , productQuantity)
         formData.append('productColors' , productColors)
-        formData.append('productImages', productImages);
+        formData.append('productColor1' , productColors[0])
+        formData.append('productColor2' , productColors[1])
+        formData.append('productColor3' , productColors[2])
+        formData.append('image', file);;
 
-        /*productImages.forEach((image, index) => {
-            formData.append(`img${index + 1}`, image);
-        });*/
         axios.post('http://localhost:3001/api/product/' , formData)
         .then(res =>{
             if(res.data.staus === "Success"){
@@ -110,57 +106,39 @@ const AddProduct = () => {
                                 <label htmlFor="productImages">Product Images:</label>
                                 <input
                                 type="file"
-                                id="productImages"
-                                name="productImages"
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                multiple
+                                name="image"
+                                onChange={handleFile}
                                 />
                             </div>
-                            <div className="rendred-img">
+                            <img src={previewImage} alt={`blog img`} className="h-[150px] w-[250px] rounded-md"/>
+                            {/*<div className="rendred-img">
                                 {productImages.map((image, index) => (
                                     <div key={index}>
                                         <img src={URL.createObjectURL(image)} alt={`Product ${index + 1}`} />
                                     </div>
                                 ))}
-                            </div>
+                                </div>*/}
                         </div>
                         <div className="product-colors">
                             <div className="input-color">
-                               <div>
-                                    <label htmlFor="colorInput1">Color 1:</label>
-                                    <input
-                                    type="color"
-                                    id="colorInput1"
-                                    value={productColors.color1}
-                                    onChange={(e) => handleColorChange(e, 'color1')}
-                                    required
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="colorInput2">Color 2:</label>
-                                    <input
-                                    type="color"
-                                    id="colorInput2"
-                                    value={productColors.color2}
-                                    onChange={(e) => handleColorChange(e, 'color2')}
-                                    />
-                                </div>
-                                <div>
-                                    <label htmlFor="colorInput3">Color 3:</label>
-                                    <input
-                                    type="color"
-                                    id="colorInput3"
-                                    value={productColors.color3}
-                                    onChange={(e) => handleColorChange(e, 'color3')}
-                                    />
-                                </div> 
+                                {productColors.map((color, index) => (
+                                    <div key={index}>
+                                        <label htmlFor={`colorInput${index + 1}`}>{`Color ${index + 1}:`}</label>
+                                        <input
+                                        type="color"
+                                        id={`colorInput${index + 1}`}
+                                        value={color}
+                                        onChange={(e) => handleColorChange(e, index)}
+                                        required
+                                        />
+                                    </div>
+                                ))}
                             </div>
                             <div className="rendred-colors">
                                 <p>Selected Colors:</p>
-                                <div style={{ backgroundColor: productColors.color1  }}></div>
-                                <div style={{ backgroundColor: productColors.color2 }}></div>
-                                <div style={{ backgroundColor: productColors.color3 }}></div>
+                                {productColors.map((color, index) => (
+                                <div key={index} style={{ backgroundColor: color }}></div>
+                                ))}
                             </div>
                         </div>
                         <div className="product-numbers">

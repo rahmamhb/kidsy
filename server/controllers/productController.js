@@ -1,8 +1,6 @@
 const db = require('../db');
 
 const create = async (req, res) => {
-  console.log(req.files)
-  console.log(req.body.productImages)
   const {
       productName,
       productDescription,
@@ -10,86 +8,82 @@ const create = async (req, res) => {
       productDiscount,
       productCategory,
       productQuantity,
-      productColors,
+      productColor1 ,
+      productColor2 ,
+      productColor3 ,
   } = req.body;
+  const productImg = req.file.filename ;
 
-  const images = req.files[0]; 
-  console.log(images)
+    try {
+        console.log(req.body)
+        const productQuery = 'INSERT INTO product VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const productValues = [
+            productName,
+            productDescription,
+            productImg,
+            null,
+            null,
+            productPrice,
+            productDiscount,
+            productCategory,
+            productQuantity,
+        ];
 
-  db.beginTransaction(async (err) => {
-      if (err) {
-          console.error('Error starting transaction: ', err);
-          return res.status(500).json({ error: 'Internal Server Error' });
-      }
-
-      try {
-          
-          const productQuery = 'INSERT INTO product VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-          const productValues = [
-              productName,
-              productDescription,
-              /*images[0].filename ||*/ null, 
-              /*images[1].filename ||*/ null,
-              /*images[2].filename ||*/ null,
-              productPrice,
-              productDiscount,
-              productCategory,
-              productQuantity,
-          ];
-
-          const [productResult] = await db.query(productQuery, productValues);
-          const productId = productResult.insertId;
-
-          // Second query: Insert into color table and associate with product
-          for (const color in productColors) {
-              const colorQuery = 'INSERT INTO color VALUES (NULL, ?)';
-              const colorValues = [color];
-
-              const [colorResult] = await db.query(colorQuery, colorValues);
-              const colorId = colorResult.insertId;
-
-              // Third query: Insert into product_color table
-              const productColorQuery = 'INSERT INTO product_color VALUES (?, ?)';
-              const productColorValues = [productId, colorId];
-
-              await db.query(productColorQuery, productColorValues);
-          }
-
-          // Commit the transaction if all queries succeed
-          db.commit((commitErr) => {
-              if (commitErr) {
-                  console.error('Error committing transaction: ', commitErr);
-                  return res.status(500).json({ error: 'Internal Server Error' });
-              }
-
-              const newItem = {
-                  id: productId,
-                  productName,
-                  productDescription,
-                  productImg: null,
-                  productImg1: null,
-                  productImg2: null,
-                  productPrice,
-                  productDiscount,
-                  productCategory,
-                  productQuantity,
-                  colors: productColors,
-              };
-
-              res.status(201).json(newItem);
+        const productResult = await new Promise((resolve, reject) => {
+          db.query(productQuery, productValues, function (err, result, fields) {
+            if (err) reject(err);
+            resolve(result);
           });
-      } catch (queryErr) {
-          // If any query fails, roll back the transaction
-          db.rollback(() => {
-              console.error('Error rolling back transaction: ', queryErr);
-              res.status(500).json({ error: 'Internal Server Error' });
+        });
+    
+        const productID = productResult.insertId;
+
+      // Iterate over productColors array from req.body
+        for (let i = 1 ; i<4 ; i++) {
+          const colorQuery = 'INSERT INTO color VALUES (NULL, ?)';
+          const value = `productColor${i}`
+          const colorValues = [req.body[value]];
+          const colorResult = await new Promise((resolve, reject) => {
+            db.query(colorQuery, colorValues, function (err, result, fields) {
+              if (err) reject(err);
+              resolve(result);
+            });
           });
+    
+          const colorID = colorResult.insertId;
+  
+        const productColorQuery = 'INSERT INTO product_color VALUES (?, ?)';
+        const productColorValues = [productID, colorID];
+        await new Promise((resolve, reject) => {
+          db.query(productColorQuery, productColorValues, function (err, result, fields) {
+            if (err) reject(err);
+            resolve(result);
+          });
+        });
       }
-  });
+  
+      const newItem = {
+        id: productID,
+        productName,
+        productDescription,
+        productImg,
+        productPrice,
+        productDiscount,
+        productCategory,
+        productQuantity,
+        colors: req.body.productColors,
+      };
+          res.status(201).json(newItem);
+    
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
 };
 
+
 const readAll = (req, res) => {
-    const sql = "SELECT * FROM product"
+    const sql = 'SELECT p.*, c.categoryName AS "categoryName", COUNT(r.reviewID) AS "productReviewsNbr", AVG(r.reviewRate) AS "productRating" FROM product p JOIN category c ON c.categoryID = p.productCategory LEFT JOIN review r ON r.productID = p.productID AND r.reviewApproved = 1 GROUP BY p.productID, p.productName, p.productDescription, p.productImg, p.productPrice, p.productDiscount, p.productCategory, p.productQuantity, c.categoryName; '
     db.query(sql , (err , results)=>{
         if(err){
             console.error('Error retrieving items: ', err);
@@ -100,7 +94,7 @@ const readAll = (req, res) => {
 };
 const readOne = (req, res) => {
     const itemId = req.params.id;
-    const sql = 'SELECT * FROM product WHERE id = ?';
+    const sql = 'SELECT * FROM product WHERE productID = ?';
     const values = [itemId];
   
     db.query(sql, values, (err, results) => {
@@ -130,7 +124,7 @@ const readTopSix = (req, res) => {
 
 const deleteOne = (req, res) => {
     const itemId = req.params.id;
-    const sql = 'DELETE FROM product WHERE id = ?';
+    const sql = 'DELETE FROM product WHERE productID = ?';
     const values = [itemId];
   
     db.query(sql, values, (err, results) => {
@@ -146,10 +140,7 @@ const deleteOne = (req, res) => {
       const item = results[0];
       res.status(200).json(item);
     });
-};
-const updateOne = (req, res) => {
-    
-};
+}
   
 module.exports = {
     create,
@@ -157,5 +148,4 @@ module.exports = {
     readOne,
     readTopSix,
     deleteOne,
-    updateOne,
 };

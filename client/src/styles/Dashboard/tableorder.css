@@ -10,10 +10,8 @@ td, th {
 th{
     cursor: pointer;
 }
-.status-row{
-    display: flex;
-    align-items: center;
-    column-gap: 1em;
+.status-row svg{
+    padding: 0px 0px 0px 10px;
 }
 .status-row.Delivered{
     color: #8BDA4C;

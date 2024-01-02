@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import EditIcon from '@mui/icons-material/ModeEditOutlineRounded';
+import DeleteIcon from '@mui/icons-material/DeleteRounded';
 import DoDisturbIcon from '@mui/icons-material/DoDisturbAltRounded';
 import CheckIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import "../../styles/Dashboard/tableorder.css"
-import { NavLink } from 'react-router-dom';
 
-const TableStock = ({ data }) => {
+const TableStock = ({ data , OnDeleteProduct}) => {
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: 'ascending',
@@ -41,7 +40,7 @@ const TableStock = ({ data }) => {
         <tr>
           <th onClick={() => handleSort('productID')}>N° Product </th>
           <th onClick={() => handleSort('productPrice')}>Price </th>
-          <th onClick={() => handleSort('productCategory')}>Category </th>
+          <th onClick={() => handleSort('categoryName')}>Category </th>
           <th onClick={() => handleSort('productQuantity')}>Status</th>
         </tr>
       </thead>
@@ -50,14 +49,14 @@ const TableStock = ({ data }) => {
           <tr key={index}>
             <td>#{row.productID}</td>
             <td>{row.productPrice} DZD</td>
-            <td>{row.productCategory}</td>
+            <td>{row.categoryName}</td>
             <td className={handleClassName(row.productQuantity)}>
                 {row.productQuantity === 0 && "out of stock"}
                 {row.productQuantity > 0  && "in stock"}
                 {row.productQuantity === 0 && <DoDisturbIcon></DoDisturbIcon>}
                 {row.productQuantity > 0  &&  <CheckIcon></CheckIcon>}
             </td>
-            <td> <NavLink to={`/stock/productdetail/${row.productID}`}><EditIcon></EditIcon></NavLink></td>
+            <td className='cursor-pointer' onClick={()=>{OnDeleteProduct(row.productID)}}><DeleteIcon></DeleteIcon></td>
           </tr>
         ))}
       </tbody>
