@@ -81,7 +81,6 @@ const create = async (req, res) => {
       }
 };
 
-
 const readAll = (req, res) => {
     const sql = 'SELECT p.*, c.categoryName AS "categoryName", COUNT(r.reviewID) AS "productReviewsNbr", AVG(r.reviewRate) AS "productRating" FROM product p JOIN category c ON c.categoryID = p.productCategory LEFT JOIN review r ON r.productID = p.productID AND r.reviewApproved = 1 GROUP BY p.productID, p.productName, p.productDescription, p.productImg, p.productPrice, p.productDiscount, p.productCategory, p.productQuantity, c.categoryName; '
     db.query(sql , (err , results)=>{
@@ -94,7 +93,7 @@ const readAll = (req, res) => {
 };
 const readOne = (req, res) => {
     const itemId = req.params.id;
-    const sql = 'SELECT * FROM product WHERE productID = ?';
+    const sql = 'SELECT p.*, c.categoryName AS "categoryName", COUNT(r.reviewID) AS "productReviewsNbr", AVG(r.reviewRate) AS "productRating" FROM product p JOIN category c ON c.categoryID = p.productCategory LEFT JOIN review r ON r.productID = p.productID AND r.reviewApproved = 1 WHERE p.productID = ? GROUP BY p.productID, p.productName, p.productDescription, p.productImg, p.productPrice, p.productDiscount, p.productCategory, p.productQuantity, c.categoryName';
     const values = [itemId];
   
     db.query(sql, values, (err, results) => {
@@ -112,7 +111,7 @@ const readOne = (req, res) => {
     });
 };
 const readTopSix = (req, res) => {
-    const sql = "SELECT * FROM product "
+    const sql = 'SELECT p.*, c.categoryName AS "categoryName", COUNT(r.reviewID) AS "productReviewsNbr", AVG(r.reviewRate) AS "productRating" FROM product p JOIN category c ON c.categoryID = p.productCategory LEFT JOIN review r ON r.productID = p.productID AND r.reviewApproved = 1 GROUP BY p.productID, p.productName, p.productDescription, p.productImg, p.productPrice, p.productDiscount, p.productCategory, p.productQuantity, c.categoryName ORDER BY `productRating` DESC LIMIT 6'
     db.query(sql , (err , results)=>{
         if(err){
             console.error('Error retrieving items: ', err);

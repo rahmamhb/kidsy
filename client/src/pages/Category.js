@@ -16,16 +16,7 @@ import RatingStars from "../components/RatingStars";
 import axios from 'axios';
 import "../styles/Category.css" ;
 const Category = () => {
-    const [productsData , setProductData] = useState([
-        {productID : 1 , productName : "Product name" , productRating : 4.5 , productReviewsNbr : "15" , productPrice : "2500"  , productImg : prodImg , productImg1 : prodImg1 , productImg2 : prodImg2 , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4 , productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 2 , productName : "Product name" , productRating : 3 , productReviewsNbr : "15" , productPrice : "3500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 3 , productName : "Product name" , productRating : 5 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 4 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.5, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 5 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "5500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 6 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.4, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 7 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.2, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"},
-        {productID : 8 , productName : "Product name" , productRating : 4 , productReviewsNbr : "15" , productPrice : "2500", productImg : prodImg , productImg1 : prodImg , productImg2 : prodImg , productColor1 : "249 233 251" , productColor2 : "89 126 181" , productColor3 : "240 193 196" , productDiscount : 0.6, productDiscription : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu.  Aliquam malesuada nunc eros, sit amet fringilla erat tincidunt eu"}
-    ])
+    const [productsData , setProductData] = useState([])
     let [CategoriesData , setCategoriesData ]= useState([])
     const [colorsData , setColorsData] = useState([
         {colorID : 1 , colorValue : "255 255 255" , colorName : "white"} ,
@@ -33,11 +24,7 @@ const Category = () => {
         {colorID : 3 , colorValue : "255 255 255" , colorName : "white"} ,
         {colorID : 4 , colorValue : "255 255 255" , colorName : "white"} ,
     ])
-    const [reviewsData, setReviewsData] = useState([
-        {reviewID : 1 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
-        {reviewID : 2 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
-        {reviewID : 3 , reviewContent : "Lorem ipsum dolor sit amet, consectetur adipiscing elit." , reviewerName : "Nom Prenom" , reviewRate : 4 , ReviewDate : "Oct 26 , 2023"},
-    ]);
+    const [reviewsData, setReviewsData] = useState([]);
 
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
@@ -53,22 +40,73 @@ const Category = () => {
     const [reviewRate , setReviewRate] = useState(1) ;
     const [reviewContent , setReviewContent] = useState("") ;
     const [newReview, setNewReview] = useState([]);
-    const [selectedImg , setSlectedImg] = useState(prodImg);
+    const [selectedImg , setSlectedImg] = useState();
     const categoryID = useParams().categoryID;
     const location = useLocation();
     const [visibleCategories, setVisibleCategories] = useState(5);
+
     const showMoreProducts = () => {
         setVisibleCategories(visibleCategories + CategoriesData.length - 5);
     };
+    
 
     useEffect(() => {
         fetchCategories();
-        const currentCategory = CategoriesData.find(cat => cat.CategoryID === Number(categoryID));
-        setCategory(currentCategory ? currentCategory.CategoryName : '');
+        const currentCategory = CategoriesData.find(cat => cat.categoryID === Number(categoryID));
+        setCategory(currentCategory ? currentCategory.categoryName : '');
         fetchProducts(categoryID);
     }, [location.search, categoryID , CategoriesData]);
+
+    const handleProductClick = (index , id)=>{
+        setSelectedProduct(productsData[index])
+        fetchProductReviews(id)
+        console.log(id)
+    }
+    const handleSubmitReview = (id)=>{
+        console.log(id)
+        const formData = new FormData();
+        formData.append('productID', id);
+        formData.append('reviewContent', reviewContent);
+        formData.append('reviewRate', reviewRate);
+        formData.append('reviwerName', reviewerName);
+        formData.append('reviwerEmail', reviewerEmail);
+       
+        const data = {
+            productID :  id,
+            reviewContent :  reviewContent,
+            reviewRate :  reviewRate,
+            reviwerName :  reviewerName,
+            reviwerEmail :  reviewerEmail,
+        };
+        console.log(formData)
+        console.log(data)
+        axios.post('http://localhost:3001/api/review/' , data)
+        .then(res =>{
+            if(res.data.staus === "Success"){
+                console.log("succeded")
+            }
+            else{
+                console.log("failed")
+            }
+        })
+        .catch(err => console.log(err))
+    }
+    
+    const fetchProductReviews = async (productId) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/api/review/${productId}`); ;
+            setReviewsData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
     const fetchProducts = async (categoryId) => {
-      
+        try {
+            const response = await axios.get(`http://localhost:3001/api/product-by-category/${categoryId}`); 
+            setProductData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
     const fetchCategories = async () => {
         try {
@@ -78,7 +116,6 @@ const Category = () => {
             console.error('Error fetching data:', error);
         }
     }
-
     return ( 
         <div className="category-page">
             <Navbar></Navbar>
@@ -200,14 +237,14 @@ const Category = () => {
                                 <div className="selected-product-images">
                                     <img src={selectedImg} alt="big-img" className="big-img"/>
                                     <div className="img-choices">
-                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg)}} className="img-choice"> 
-                                            <img src={selectedProduct.productImg} alt="img-small" /> 
+                                        <span onClick={()=>{setSlectedImg(`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`)}} className="img-choice"> 
+                                            <img src={`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`} alt="img-small" /> 
                                         </span>
-                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg1)}} className="img-choice"> 
-                                            <img src={selectedProduct.productImg1} alt="img-small" /> 
+                                        <span onClick={()=>{setSlectedImg(`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`)}} className="img-choice"> 
+                                            <img src={`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`} alt="img-small" /> 
                                         </span>
-                                        <span onClick={()=>{setSlectedImg(selectedProduct.productImg2)}} className="img-choice"> 
-                                            <img src={selectedProduct.productImg2} alt="img-small" /> 
+                                        <span onClick={()=>{setSlectedImg(`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`)}} className="img-choice"> 
+                                            <img src={`http://localhost:3001/api/blog/images/${selectedProduct.productImg}`} alt="img-small" /> 
                                         </span>
                                     </div>
                                 </div>
@@ -227,9 +264,9 @@ const Category = () => {
                                         <div className="selected-product-info12">
                                             <p className="header">colors :</p>
                                             <div  className="selected-product-colors">
-                                                <span className="selected-product-color one" style={{"--productColor": selectedProduct.productColor1}}></span>
-                                                <span className="selected-product-color two" style={{"--productColor": selectedProduct.productColor1}}></span>
-                                                <span className="selected-product-color three" style={{"--productColor": selectedProduct.productColor1}}></span>
+                                                <span className="selected-product-color one" style={{ backgroundColor: selectedProduct.productColor1}}></span>
+                                                <span className="selected-product-color two" style={{ backgroundColor: selectedProduct.productColor2}}></span>
+                                                <span className="selected-product-color three" style={{ backgroundColor: selectedProduct.productColor3}}></span>
                                             </div>
                                         </div>
                                         <div className="selected-product-info13">
@@ -260,10 +297,10 @@ const Category = () => {
                                                 (
                                                     <div className="one-product-old-review">
                                                         <span>
-                                                            {review.reviewerName.split(' ').map(word => word.charAt(0)).join('')}
+                                                            {review.reviwerName.split(' ').map(word => word.charAt(0)).join('')}
                                                         </span>
                                                         <div className="one-product-old-review-info">
-                                                            <p className="Reviewer-name">{review.reviewerName}</p>
+                                                            <p className="Reviewer-name">{review.reviwerName}</p>
                                                             <RatingStars rating={review.reviewRate}></RatingStars>
                                                             <p className="Review-content">{review.reviewContent}</p>
                                                             <p className="Review-date">{review.ReviewDate}</p>
@@ -275,7 +312,7 @@ const Category = () => {
                                     )}
                                     <div className="one-product-new-review">
                                         <p className="header">Rate and review </p>
-                                        <form>
+                                        <form onSubmit={()=>handleSubmitReview(selectedProduct.productID)}>
                                             <div className="star-rating">
                                                 <input className="radio-input" type="radio" id="star5" name="star-input" value="5" onChange={(e) => setReviewRate(e.target.value)} required />
                                                 <label className="radio-label"  for="star5" title="5 stars">5 stars</label>
@@ -306,7 +343,7 @@ const Category = () => {
                                                 <label>your review</label>
                                                 <textarea placeholder="" value={reviewContent} onChange={(e)=>{ setReviewContent(e.target.value)}} ></textarea>
                                             </div>
-                                            <button className="add-review-btn">Submit</button>
+                                            <button className="add-review-btn" type="submit">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -315,10 +352,10 @@ const Category = () => {
                         )}
                         <div className="product-list">
                         {productsData.map((product, index) => (
-                            <div className="popular-prod" key={product.productID} onClick={()=>{setSelectedProduct(productsData[index])}}>
+                            <div className={`popular-prod`}  key={product.productID} onClick={()=> handleProductClick(index , product.productID) }>
                                 <button className="fav-btn"><FavoriteIcon></FavoriteIcon></button>
                                 <div className="product-info">
-                                <img src={product.productImg} alt="product img"/>
+                                <img src={`http://localhost:3001/api/blog/images/${product.productImg}`} alt="product img"/>
                                 <div className="product-info-txt">
                                     <div className="product-info-txt-1">
                                         <p className="prod-name">{product.productName}</p>

@@ -40,7 +40,7 @@ const readAll = (req , res)=>{
 }
 const readApproved = (req , res) =>{
     const itemId = req.params.id;
-    const sql = "SELECT * FROM review r WHERE r.productID = 4 AND r.reviewApproved = 1 ORDER BY r.created_at DESC "
+    const sql = "SELECT * FROM review r WHERE r.productID = ? AND r.reviewApproved = 1 ORDER BY r.created_at DESC "
     const values = [itemId]
     db.query(sql , values ,(err , results)=>{
         if(err){

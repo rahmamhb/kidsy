@@ -62,11 +62,12 @@
 .product-info{
     display: flex;
     flex-direction: row;
+    column-gap: 1em;
 }
 .product-info img{
     border-radius: 7px;
-    height: 110px;
-    width: 110px;
+    height: 100px;
+    width: 100px;
 }
 .product-info-txt {
     display: flex;
