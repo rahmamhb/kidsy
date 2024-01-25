@@ -39,7 +39,6 @@ const Category = () => {
     const [reviewerEmail , setReviewerEmail] = useState("") ;
     const [reviewRate , setReviewRate] = useState(1) ;
     const [reviewContent , setReviewContent] = useState("") ;
-    const [newReview, setNewReview] = useState([]);
     const [selectedImg , setSlectedImg] = useState();
     const categoryID = useParams().categoryID;
     const location = useLocation();
@@ -91,7 +90,23 @@ const Category = () => {
         })
         .catch(err => console.log(err))
     }
-    
+    const handleAddToCart = (prodID)=>{
+        const data = {
+          cartID : 1,
+          productID : prodID ,
+          productQuantityInCart : 1,
+        };
+        axios.post('http://localhost:3001/api/cart-product' , data)
+        .then(res =>{
+            if(res.data.staus === "Success"){
+                console.log("succeded")
+            }
+            else{
+                console.log("failed")
+            }
+        })
+        .catch(err => console.log(err))
+      }
     const fetchProductReviews = async (productId) => {
         try {
             const response = await axios.get(`http://localhost:3001/api/review/${productId}`); ;
@@ -283,7 +298,7 @@ const Category = () => {
                                                     )}
                                                 </div>
                                             </div>
-                                            <button className="selected-product-add-btn">Add to cart</button>
+                                            <button className="selected-product-add-btn hover:grayscale" onClick={()=>handleAddToCart(selectedProduct.productID)}>Add to cart</button>
                                         </div>
                                     </div>
                                 </div> 
@@ -366,7 +381,7 @@ const Category = () => {
                                     </div>
                                     <div className="product-info-txt-2">
                                         <p className="prod-price">Total price : <span>{product.productPrice} DZD</span></p>
-                                        <button className="add-cart-btn">Add to cart</button>
+                                        <button className="add-cart-btn" onClick={()=>handleAddToCart(product.productID)}>Add to cart</button>
                                     </div>
                                 </div>
                                 </div>

@@ -4,21 +4,17 @@ import "../styles/Cart.css"
 import prodImg from "../assets/socks.jpg"
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import ArrowIcon from '@mui/icons-material/ArrowBackRounded';
-import { useState } from "react";
+import { useState , useEffect} from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 const Cart = () => {
 
-    const [cartData, setCartData] = useState([
-        { productID: 1, productImg: prodImg, productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 2, productImg: prodImg, productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 3, productImg: prodImg, productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 4, productImg: prodImg, productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 5, productImg: prodImg, productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-    ]);
-    console.log(cartData.length)
-
-    console.log(cartData)
+    const [cartData, setCartData] = useState([]);
+ 
+    useEffect(() => {
+        fetchCartElement(1);
+    }, [cartData]);
 
     const updateQuantity = (id, value) => {
         setCartData((prevCartData) =>
@@ -29,6 +25,36 @@ const Cart = () => {
             )
         );
     };
+    const fetchCartElement = async (cartId) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/api/cart-product/${cartId}`); ;
+            setCartData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+    const handleDeleteProduct = async (cartId , productId) => {
+        axios.delete(`http://localhost:3001/api/cart-product/${cartId}/${productId}`)
+        .then(response =>{
+            console.log('deleted successful:', response.data);
+        })
+        .catch(error => {
+            console.error('Error updating data:', error);
+        })
+    };
+    const handleUpdateQuantity= async (cartId , productId , quantity) => {
+        const data = {
+            productQuantityInCart : quantity
+        }
+        axios.put(`http://localhost:3001/api/cart-product/${cartId}/${productId}` , data)
+        .then(response =>{
+            console.log('deleted successful:', response.data);
+        })
+        .catch(error => {
+            console.error('Error updating data:', error);
+        })
+    };
+    
     const calculateTotalPrice = () => {
         return cartData.reduce((total, item) => total + item.productCartQuantity * item.productPrice, 0);
     };
@@ -51,17 +77,17 @@ const Cart = () => {
                         <div className="cart-elems">
                             {cartData.map((product , index)=>(
                                 <div className="cart-item">
-                                    <img src={product.productImg} alt="product img"/>
+                                    <img src={`http://localhost:3001/api/blog/images/${product.productImg}`} alt="product img"/>
                                     <div className="cart-item-txt">
                                         <p>{product.productName}</p>
                                         <p>{product.productPrice} DZD</p>
                                     </div>
                                     <div className='counter'>
-                                        <button onClick={() => updateQuantity(product.productID, -1)}>-</button>
+                                        <button onClick={() => handleUpdateQuantity(1 , product.productID , -1)}>-</button>
                                         <p>{product.productCartQuantity}</p>
-                                        <button onClick={() => updateQuantity(product.productID, 1)}>+</button> 
+                                        <button onClick={() => handleUpdateQuantity(1 , product.productID , 1)}>+</button> 
                                     </div>
-                                    <button className="remove-icon"><CloseIcon></CloseIcon></button>
+                                    <button className="remove-icon" onClick={()=>handleDeleteProduct(1 , product.productID)}><CloseIcon></CloseIcon></button>
                                 </div>
                             ))}
                         </div>
@@ -73,7 +99,7 @@ const Cart = () => {
                             if (product.productCartQuantity > 0){
                             return (
                                 <div className="cart-item">
-                                    <img src={product.productImg} alt="product img"/>
+                                    <img src={`http://localhost:3001/api/blog/images/${product.productImg}`} alt="product img"/>
                                     <div className="cart-item-txt">
                                         <p>{product.productName}</p>
                                         <p>{product.productCartQuantity}</p>

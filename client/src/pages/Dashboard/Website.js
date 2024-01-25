@@ -93,17 +93,6 @@ const Website = () => {
                                 })}
                             </div>
                         </div>
-                        <div className="flex flex-col gap-5">
-                            <div className="flex flex-row justify-between">
-                                <h3 className="text-zinc-800 text-xl">History</h3>
-                                <select>
-                                    <option>Blogs</option>
-                                    <option>FAQs</option>
-                                </select>
-                            </div>
-                            <div>
-                            </div>                           
-                        </div>
                         <div className="flex flex-row items-center gap-8">
                             <NavLink to="/website/add-blog">Add a Blog</NavLink>
                             <NavLink to="/website/add-faq">Add a FAQ</NavLink>

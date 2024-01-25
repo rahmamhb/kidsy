@@ -259,6 +259,10 @@
     border-radius: 6px;
     border: 1px solid #D9D9D9;
     cursor: pointer;
+    transition: all ease-in-out .3s;
+}
+.products-section .product-info-txt-2 .add-cart-btn:hover{
+    background-color: #ebebeb;
 }
 .search-rslt{
     color: #9D9D9D;

@@ -9,6 +9,7 @@ const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/reviewRoutes')
 const faqRoutes = require('./routes/faqRoutes')
 const productCategory = require('./routes/productCategoryRoutes')
+const cartProduct = require('./routes/cartProductRoutes')
 
 app.use(cors())
 app.use(express.json())
@@ -21,6 +22,7 @@ app.use('/api/product', productRoutes)
 app.use('/api/review', reviewRoutes)
 app.use('/api/faq', faqRoutes)
 app.use('/api/product-by-category', productCategory)
+app.use('/api/cart-product', cartProduct)
 
 
 app.listen(3001, () => {

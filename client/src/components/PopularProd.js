@@ -6,6 +6,11 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 const PopularProd = () => {
+  const [visibleProducts, setVisibleProducts] = useState(2);
+  const showMoreProducts = () => {
+      setVisibleProducts(visibleProducts + 2);
+  };
+
     const [productsData , setProductsData] = useState([])
     useEffect(()=>{
       fetchData()
@@ -19,10 +24,24 @@ const PopularProd = () => {
           console.error('Error fetching data:', error);
       }
   }
-    const [visibleProducts, setVisibleProducts] = useState(2);
-    const showMoreProducts = () => {
-        setVisibleProducts(visibleProducts + 2);
-    };
+    const handleAddToCart = (prodID)=>{
+      const data = {
+        cartID : 1,
+        productID : prodID ,
+        productQuantityInCart : 1,
+      };
+      axios.post('http://localhost:3001/api/cart-product' , data)
+      .then(res =>{
+          if(res.data.staus === "Success"){
+              console.log("succeded")
+          }
+          else{
+              console.log("failed")
+          }
+      })
+      .catch(err => console.log(err))
+    }
+
     return ( 
         <div className="popuProd-container">
           <div className="product-container-head">
@@ -49,7 +68,7 @@ const PopularProd = () => {
                         </div>
                         <div className="product-info-txt-2">
                           <p className="prod-price">Total price : <span>{product.productPrice} DZD</span></p>
-                          <button className="add-cart-btn">Add to cart</button>
+                          <button className="add-cart-btn hover:grayscale" onClick={()=>handleAddToCart(product.productID)}>Add to cart</button>
                         </div>
                       </div>
                     </div>
