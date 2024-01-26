@@ -6,16 +6,22 @@ import axios from 'axios';
 
 const Checkout = () => {
     const [wilayaData ,setWilayaData] = useState([{}])
-    const [cartData, setCartData] = useState([
-        { productID: 1,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 2,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-        { productID: 3,  productName: 'baby sockets', productPrice: 2500, productCartQuantity: 2 },
-    ]);
+    const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
         fetchWilayaData();
     }, []);
-    
+    useEffect(() => {
+        fetchCartElement(1);
+    }, [cartData]);
+    const fetchCartElement = async (cartId) => {
+        try {
+            const response = await axios.get(`http://localhost:3001/api/cart-product/${cartId}`); ;
+            setCartData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
     const fetchWilayaData = async () => {
         try {
             const response = await axios.get('http://localhost:3001/api/wilaya/'); 
@@ -24,12 +30,11 @@ const Checkout = () => {
             console.error('Error fetching data:', error);
         }
     };
-    console.log(wilayaData)
     const [clientFisrtName , setClientFisrtName] = useState("") ;
     const [clientLastName , setClientLastName] = useState("") ;
     const [clientPhone , setClientPhone] = useState(0) ;
     const [clientEmail , setClientEmail] = useState("") ;
-    const [wilaya , setWilaya] = useState(wilayaData[0].wilayaName) ;
+    const [wilaya , setWilaya] = useState(wilayaData[0].wilayaID) ;
     const [fullAdress , setFullAdress] = useState("") ;
     const [zipCode, setzipCode] = useState(0) ;
     const [oredrNotes , setOrderNotes] = useState("") ;
@@ -38,10 +43,46 @@ const Checkout = () => {
     function handleWilayaChange(event) {
         const selectedWilayaName = event.target.value;
         if(wilayaData.length > 0 ){
-            const selectedWilaya =wilayaData.find(wilaya => wilaya.wilayaName === selectedWilayaName);
+            const selectedWilaya = wilayaData.find(wilaya => wilaya.wilayaName === selectedWilayaName);
             setDeliveryPrice(selectedWilaya.deliveryPrice);
-            setWilaya(selectedWilayaName);
+            setWilaya(selectedWilaya.wilayaID)
+
+            console.log(wilaya)
+            console.log(selectedWilaya.wilayaID)
         }
+
+    }
+    const handleOrderSubmit = ()=>{
+        const formData = new FormData()
+        formData.append('cartID', 1);
+        formData.append('clientFisrtName', clientFisrtName);
+        formData.append('clientLastName', clientLastName);
+        formData.append('clientPhone', clientPhone);
+        formData.append('clientEmail', clientEmail);
+        formData.append('wilaya', wilaya);
+        formData.append('fullAdress', fullAdress);
+        formData.append('zipCode', zipCode);
+        const data = {
+            cartID: 1,
+            clientFisrtName: clientFisrtName,
+            clientLastName: clientLastName,
+            clientPhone: clientPhone,
+            clientEmail: clientEmail,
+            wilaya: wilaya,
+            fullAdress: fullAdress,
+            zipCode: zipCode
+        };
+        axios.post('http://localhost:3001/api/order/' , data)
+        .then(res =>{
+            if(res.data.staus === "Success"){
+                console.log("succeded")
+            }
+            else{
+                console.log("failed")
+            }
+        })
+        .catch(err => console.log(err))
+
     }
     const calculateTotalPrice = () => {
         const total =  cartData.reduce((total, item) => total + item.productCartQuantity * item.productPrice, 0);
@@ -52,7 +93,7 @@ const Checkout = () => {
             <Navbar></Navbar>
             <div className="checkout-page">
                 <p className="checkout-header">Billing details</p>
-                <form className="checkout-container-form">
+                <form className="checkout-container-form" onSubmit={handleOrderSubmit}>
                     <div className="checkout-inputs">
                         <div className="form-mini-section">
                             <div class="label-float">
@@ -120,7 +161,7 @@ const Checkout = () => {
                             <p className="bold">{calculateTotalPrice()} DZD</p>
                         </span>
                         <p className="txt-1">Cash on delivery</p>
-                        <button className="order-btn" type="submit">PLACE OREDER</button>
+                        <button className="order-btn" type="submit" >PLACE OREDER</button>
                         <span className="remarque">
                         Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy. 
                         </span>

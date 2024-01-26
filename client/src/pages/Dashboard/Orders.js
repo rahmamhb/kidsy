@@ -1,16 +1,23 @@
 import Sidebar from "../../components/Dashboard/Sidebar";
 import Header from "../../components/Dashboard/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableOrder from "../../components/Dashboard/TableOrder";
+import axios from 'axios';
 const Orders = () => {
-    const [orderData , setOrderData] = useState([
-        {orderID : 10269 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Delivered"},
-        {orderID : 10266 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Processing"},
-        {orderID : 10261 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Pending"},
-        {orderID : 10263 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Confirmed"},
-        {orderID : 10268 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Delivered"},
-        {orderID : 10265 , orderCost : 2500 , orderCostumer : "Mihoub Rahma" , orderDate : "26/10/2023" , orderStatus : "Delivered"},
-    ])
+    const [orderData , setOrderData] = useState([])
+    useEffect(() => {
+        fetchOrders();
+    }, []);
+
+    const fetchOrders = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/api/order/'); 
+            console.log(response.data)
+            setOrderData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
     return ( 
         <div className="Dashboard-page">
             <Sidebar></Sidebar>
